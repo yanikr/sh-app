@@ -1,5 +1,5 @@
 {
-  "name": "https://yanikr.github.io/sh-app",
+  "homepage": "https://yanikr.github.io/sh-app",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
