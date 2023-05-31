@@ -60,6 +60,7 @@ export const HeroDetails = ({ hero }) => {
         sx={{
           display: 'flex',
           gap: '10px',
+          justifyContent: 'center',
           mb: '2rem',
         }}
       >
@@ -168,16 +169,6 @@ export const HeroDetails = ({ hero }) => {
           </span>
           {superpowers}
         </Typography>
-        <Link component={RouterLink} to="/">
-          <Button
-            type="button"
-            onClick={() => handleDeleteHero(_id)}
-            startIcon={<ReportProblemIcon fontSize="large" />}
-            endIcon={<ReportProblemIcon fontSize="large" />}
-          >
-            Remove Superhero
-          </Button>
-        </Link>
       </Box>
 
       {Images && Images.length > 0 ? (
@@ -188,6 +179,7 @@ export const HeroDetails = ({ hero }) => {
             justifyContent: 'center',
             gap: '10px',
             flexWrap: 'wrap',
+            marginBottom: '2rem',
           }}
         >
           {Images.map(Image => (
@@ -241,7 +233,25 @@ export const HeroDetails = ({ hero }) => {
           />
         </Box>
       )}
-
+      <Box
+        style={{
+          position: 'fixed',
+          bottom: '56px',
+          left: '56px',
+          zIndex: 1000,
+        }}
+      >
+        <Link component={RouterLink} to="/">
+          <Button
+            type="button"
+            onClick={() => handleDeleteHero(_id)}
+            startIcon={<ReportProblemIcon fontSize="large" />}
+            endIcon={<ReportProblemIcon fontSize="large" />}
+          >
+            Remove Superhero
+          </Button>
+        </Link>
+      </Box>
       <Formik initialValues={{ file: null }} onSubmit={handleUploadImage}>
         {formik => (
           <form onSubmit={formik.handleSubmit}>
