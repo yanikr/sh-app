@@ -1,24 +1,21 @@
 // import logo from './logo.svg';
 import './App.css';
-import { NavBar } from './screens/navbar/NavBar';
+import { NavBar } from './screens/logo/Logo';
 import { HomeScreen } from './screens/home/HomeScreen';
-import { ThemeProvider, createTheme } from '@mui/material';
+import { ThemeProvider } from '@mui/material';
 import { themeSettings } from './theme';
 import { Route, Routes } from 'react-router-dom';
 import { HeroPage } from './components/heroes/HeroPage';
 
 function App() {
-  const theme = createTheme(themeSettings());
   return (
-    <>
-      <ThemeProvider theme={theme}>
-        <NavBar />
-        <Routes>
-          <Route path="/" element={<HomeScreen />} />
-          <Route path="/:id" element={<HeroPage />} />
-        </Routes>
-      </ThemeProvider>
-    </>
+    <ThemeProvider theme={themeSettings}>
+      <NavBar />
+      <Routes>
+        <Route path="/" element={<HomeScreen />} />
+        <Route path="/:id" element={<HeroPage />} />
+      </Routes>
+    </ThemeProvider>
   );
 }
 

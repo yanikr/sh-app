@@ -4,6 +4,7 @@
   box-sizing: border-box;
 }
 body {
+  background-color: #f2dcb1;
   box-sizing: border-box;
   margin: 0;
   font-family: "Coming Soon", cursive;
@@ -39,11 +40,11 @@ ol {
   list-style: none;
 }
 
-img {
+/* img {
   display: block;
   max-width: 100%;
   height: auto;
-}
+} */
 
 button {
   padding: 0;

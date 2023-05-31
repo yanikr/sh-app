@@ -1,18 +1,20 @@
 import { Box, Modal } from '@mui/material';
-import { useState } from 'react';
+
 import { CreateHeroForm } from './Form';
+import { useDispatch, useSelector } from 'react-redux';
+import { closeModal } from '../../state/state';
 
 export const FormModal = ({ onClose }) => {
-  const [open, setOpen] = useState(true);
-
+  const dispatch = useDispatch();
+  const modalOpen = useSelector(state => state.heroes.modalOpen);
   const handleClose = () => {
-    setOpen(false);
     onClose();
+    dispatch(closeModal());
   };
   const handleFormSubmit = values => {};
   return (
     <Modal
-      open={open}
+      open={modalOpen}
       onClose={handleClose}
       closeAfterTransition
       slotProps={{
@@ -32,6 +34,9 @@ export const FormModal = ({ onClose }) => {
           transform: 'translate(-50%, -50%)',
           bgcolor: 'background.paper',
           boxShadow: 24,
+          border: '2px black solid',
+          borderRadius: '4px',
+          backgroundColor: '#f2dcb1',
           p: 4,
         }}
       >

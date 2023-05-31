@@ -1,6 +1,15 @@
-import { Button, IconButton, Input, Link } from '@mui/material';
+import {
+  Box,
+  Button,
+  Container,
+  IconButton,
+  Input,
+  Link,
+  Typography,
+} from '@mui/material';
 import { addImage, deleteHero, removeImage } from '../api';
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import ReportProblemIcon from '@mui/icons-material/ReportProblem';
 import { Formik } from 'formik';
 import { Link as RouterLink } from 'react-router-dom';
 export const HeroDetails = ({ hero }) => {
@@ -19,10 +28,8 @@ export const HeroDetails = ({ hero }) => {
       const response = await removeImage(_id, Image);
 
       window.location.reload();
-      // Handle success, update component or perform any necessary actions
       console.log(response);
     } catch (error) {
-      // Handle error
       console.error(error);
     }
   };
@@ -48,17 +55,162 @@ export const HeroDetails = ({ hero }) => {
     }
   };
   return (
-    <div>
-      <Link component={RouterLink} to="/">
-        <Button type="button" onClick={() => handleDeleteHero(_id)}>
-          Remove Superhero
-        </Button>
-      </Link>
-      {Images && Images.length > 1 ? (
-        <ul>
+    <Container>
+      <Box
+        sx={{
+          display: 'flex',
+          gap: '10px',
+          mb: '2rem',
+        }}
+      >
+        <Typography
+          sx={{
+            backgroundColor: '#f4e8ad',
+            p: '10px',
+            border: 2,
+            borderRadius: '4px',
+            fontSize: '1.2rem',
+          }}
+        >
+          <span
+            style={{
+              minWidth: '120px',
+              fontWeight: '800',
+              display: 'block',
+              marginBottom: '5px',
+            }}
+          >
+            Nickname:
+          </span>
+          {nickname}
+        </Typography>
+        <Typography
+          sx={{
+            backgroundColor: '#f4e8ad',
+            p: '10px',
+            border: 2,
+            borderRadius: '4px',
+            fontSize: '1.2rem',
+          }}
+        >
+          <span
+            style={{
+              minWidth: '120px',
+              fontWeight: '800',
+              display: 'block',
+              marginBottom: '5px',
+            }}
+          >
+            Real name:{' '}
+          </span>
+          {real_name}
+        </Typography>
+        <Typography
+          sx={{
+            backgroundColor: '#f4e8ad',
+            p: '10px',
+            border: 2,
+            borderRadius: '4px',
+            fontSize: '1.2rem',
+          }}
+        >
+          <span
+            style={{
+              minWidth: '120px',
+              fontWeight: '800',
+              display: 'block',
+              marginBottom: '5px',
+            }}
+          >
+            Catch phrase:{' '}
+          </span>
+          {catch_phrase}
+        </Typography>
+        <Typography
+          sx={{
+            backgroundColor: '#f4e8ad',
+            p: '10px',
+            border: 2,
+            borderRadius: '4px',
+            fontSize: '1.2rem',
+          }}
+        >
+          <span
+            style={{
+              minWidth: '120px',
+              fontWeight: '800',
+              display: 'block',
+              marginBottom: '5px',
+            }}
+          >
+            Description:{' '}
+          </span>
+          {origin_description}
+        </Typography>
+        <Typography
+          sx={{
+            backgroundColor: '#f4e8ad',
+            p: '10px',
+            border: 2,
+            borderRadius: '4px',
+            fontSize: '1.2rem',
+          }}
+        >
+          <span
+            style={{
+              minWidth: '120px',
+              fontWeight: '800',
+              display: 'block',
+              marginBottom: '5px',
+            }}
+          >
+            Superpowers:{' '}
+          </span>
+          {superpowers}
+        </Typography>
+        <Link component={RouterLink} to="/">
+          <Button
+            type="button"
+            onClick={() => handleDeleteHero(_id)}
+            startIcon={<ReportProblemIcon fontSize="large" />}
+            endIcon={<ReportProblemIcon fontSize="large" />}
+          >
+            Remove Superhero
+          </Button>
+        </Link>
+      </Box>
+
+      {Images && Images.length > 0 ? (
+        <ul
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'center',
+            gap: '10px',
+            flexWrap: 'wrap',
+          }}
+        >
           {Images.map(Image => (
-            <li key={Image}>
-              <img src={`${Image}`} alt="asdasd" />
+            <li
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+              }}
+              key={Image}
+            >
+              <img
+                style={{
+                  height: '350px',
+                  width: '300px',
+                  objectFit: 'cover',
+                  borderTop: '2px black solid',
+                  borderLeft: '2px black solid',
+                  borderRight: '2px black solid',
+                  borderRadius: '4px',
+                }}
+                src={`${Image}`}
+                alt={`${nickname}`}
+              />
               <Button type="button" onClick={() => handleRemoveImage(Image)}>
                 Delete
               </Button>
@@ -66,19 +218,30 @@ export const HeroDetails = ({ hero }) => {
           ))}
         </ul>
       ) : (
-        <>
-          <img src={`${Images}`} alt="asdasd" />
-          <Button type="button" onClick={() => handleRemoveImage(Image)}>
-            Delete
-          </Button>
-        </>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <img
+            style={{
+              height: '350px',
+              width: '300px',
+              objectFit: 'cover',
+              border: '2px solid black',
+              borderRadius: '4px',
+            }}
+            src={
+              'https://res.cloudinary.com/dssjklxxz/image/upload/v1685545432/istockphoto-1452662817-612x612_jlos8q.jpg'
+            }
+            alt="User does not have any images"
+          />
+        </Box>
       )}
 
-      <p>{nickname}</p>
-      <p>{origin_description}</p>
-      <p>{real_name}</p>
-      <p>{superpowers}</p>
-      <p>{catch_phrase}</p>
       <Formik initialValues={{ file: null }} onSubmit={handleUploadImage}>
         {formik => (
           <form onSubmit={formik.handleSubmit}>
@@ -93,22 +256,22 @@ export const HeroDetails = ({ hero }) => {
               }}
             />
             <label htmlFor="file">
-              <IconButton
+              <Button
+                size="large"
                 style={{
                   position: 'fixed',
-                  bottom: '16px',
-                  right: '16px',
+                  bottom: '56px',
+                  right: '56px',
                   zIndex: 1000,
                 }}
                 component="span"
-                // disabled={!formik.values.file}
               >
-                <CloudUploadIcon />
-              </IconButton>
+                Add picture
+              </Button>
             </label>
           </form>
         )}
       </Formik>
-    </div>
+    </Container>
   );
 };

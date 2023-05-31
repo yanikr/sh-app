@@ -1,11 +1,12 @@
-import { Typography } from '@mui/material';
-import { FlexBetween } from '../../components/FlexBetween';
+import { Container, Typography } from '@mui/material';
+// import { FlexBetween } from '../../components/FlexBetween';
 
 export const NavBar = () => {
   return (
-    <FlexBetween padding="1rem 6%">
+    <Container sx={{ marginTop: '50px', marginBottom: '2rem' }}>
       <Typography
         style={{
+          textAlign: 'center',
           color: 'white',
           textShadow:
             '2px 2px 0px black, -2px -2px 0px black, 2px -2px 0px black, -2px 2px 0px black',
@@ -16,6 +17,6 @@ export const NavBar = () => {
       >
         SUPERHEROES
       </Typography>
-    </FlexBetween>
+    </Container>
   );
 };
