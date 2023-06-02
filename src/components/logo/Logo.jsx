@@ -2,7 +2,10 @@ import { Container, Typography } from '@mui/material';
 
 export const Logo = () => {
   return (
-    <Container sx={{ marginTop: '50px', marginBottom: '2rem' }}>
+    <Container
+      data-testid="logo"
+      sx={{ marginTop: '50px', marginBottom: '2rem' }}
+    >
       <Typography
         variant="h1"
         style={{

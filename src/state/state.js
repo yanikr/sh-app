@@ -47,7 +47,6 @@ export const addImageAsync = createAsyncThunk(
 export const removeImageAsync = createAsyncThunk(
   'heroes/removeImage',
   async ({ id, Image }) => {
-    console.log('removeImageAsync is called');
     const response = await removeImage(id, Image);
     return response;
   }

@@ -193,12 +193,10 @@ export const HomeScreen = () => {
               '& .MuiPaginationItem-root': {
                 color: 'black',
               },
-              '& .css-tpvqgl-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected':
-                {
-                  backgroundColor: '#ee6b38',
-                },
-              '& .css-tpvqgl-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected:hover':
-                { backgroundColor: '#dd551f' },
+              '& .Mui-selected': {
+                backgroundColor: '#ee6b38',
+              },
+              '& .Mui-selected:hover': { backgroundColor: '#dd551f' },
               mb: '20px',
               display: heroes.length < 6 ? 'none' : 'flex',
             }}

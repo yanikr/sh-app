@@ -58,10 +58,11 @@ export const CreateHeroForm = ({ onSubmit, onClose }) => {
             >
               <TextField
                 sx={{
-                  '& .MuiInputLabel-root': { color: 'black' },
+                  '& .MuiInputLabel-root.Mui-focused': { color: 'black' },
                   '& .MuiOutlinedInput-root.Mui-focused': {
                     '& > fieldset': {
                       borderColor: 'black',
+                      color: 'black',
                     },
                   },
                   backgroundColor: '#f4e8ad',
@@ -74,10 +75,11 @@ export const CreateHeroForm = ({ onSubmit, onClose }) => {
               />
               <TextField
                 sx={{
-                  '& .MuiInputLabel-root': { color: 'black' },
+                  '& .MuiInputLabel-root.Mui-focused': { color: 'black' },
                   '& .MuiOutlinedInput-root.Mui-focused': {
                     '& > fieldset': {
                       borderColor: 'black',
+                      color: 'black',
                     },
                   },
                   backgroundColor: '#f4e8ad',
@@ -90,10 +92,11 @@ export const CreateHeroForm = ({ onSubmit, onClose }) => {
               />
               <TextField
                 sx={{
-                  '& .MuiInputLabel-root': { color: 'black' },
+                  '& .MuiInputLabel-root.Mui-focused': { color: 'black' },
                   '& .MuiOutlinedInput-root.Mui-focused': {
                     '& > fieldset': {
                       borderColor: 'black',
+                      color: 'black',
                     },
                   },
                   backgroundColor: '#f4e8ad',
@@ -106,10 +109,11 @@ export const CreateHeroForm = ({ onSubmit, onClose }) => {
               />
               <TextField
                 sx={{
-                  '& .MuiInputLabel-root': { color: 'black' },
+                  '& .MuiInputLabel-root.Mui-focused': { color: 'black' },
                   '& .MuiOutlinedInput-root.Mui-focused': {
                     '& > fieldset': {
                       borderColor: 'black',
+                      color: 'black',
                     },
                   },
                   backgroundColor: '#f4e8ad',
@@ -122,10 +126,11 @@ export const CreateHeroForm = ({ onSubmit, onClose }) => {
               />
               <TextField
                 sx={{
-                  '& .MuiInputLabel-root': { color: 'black' },
+                  '& .MuiInputLabel-root.Mui-focused': { color: 'black' },
                   '& .MuiOutlinedInput-root.Mui-focused': {
                     '& > fieldset': {
                       borderColor: 'black',
+                      color: 'black',
                     },
                   },
                   backgroundColor: '#f4e8ad',

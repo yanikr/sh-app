@@ -1,43 +1,22 @@
 import React from 'react';
 import axios from 'axios';
 import { Provider } from 'react-redux';
-import {
-  createAsyncThunk,
-  createSlice,
-  getDefaultMiddleware,
-} from '@reduxjs/toolkit';
-// import { fetchAllHeroesAsync, store, createHeroAsync } from './state/state';
 import thunk from 'redux-thunk';
 import {
-  addImageAsync,
   closeModal,
   createHeroAsync,
-  deleteHeroAsync,
   fetchAllHeroesAsync,
   fetchHeroByIdAsync,
   openModal,
-  removeImageAsync,
   setCurrentPage,
   store,
 } from './state/state.js';
 import configureStore from 'redux-mock-store';
-import { MemoryRouter, BrowserRouter } from 'react-router-dom'; // Import MemoryRouter
+import { MemoryRouter, BrowserRouter } from 'react-router-dom';
 import { HomeScreen } from './screens/home/HomeScreen';
-// import { BrowserRouter as Router } from 'react-router-dom';
-// import { Route, Routes } from 'react-router-dom';
-// import { createMemoryHistory } from 'history';
-// import { HeroPage } from './components/heroes/HeroPage';
 import { BrowserRouter as Router } from 'react-router-dom';
 import App from './App';
-import {
-  cleanup,
-  fireEvent,
-  getByTestId,
-  getByText,
-  render,
-  screen,
-  waitFor,
-} from '@testing-library/react';
+import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import {
   addImage,
   createHero,
@@ -47,10 +26,8 @@ import {
   removeImage,
 } from './components/api';
 import { HeroDetails } from './components/heroes/HeroDetails';
-import { act } from 'react-dom/test-utils';
 import { jest } from '@jest/globals';
 import { FormModal } from './components/modal/Modal.jsx';
-import { CreateHeroForm } from './components/modal/Form.jsx';
 
 const mockStore = configureStore([thunk]);
 test('displays a message when there are no superheroes', () => {
@@ -109,11 +86,9 @@ describe('App', () => {
       </Provider>
     );
 
-    // Assert that the HeroPage component is rendered
     const heroPageElement = screen.getByTestId('hero-page');
     expect(heroPageElement).toBeInTheDocument();
 
-    // You can also assert other elements within the HeroPage component
     const backButtonElement = screen.getByText('Back to Superheroes');
     expect(backButtonElement).toBeInTheDocument();
   });
@@ -272,13 +247,6 @@ describe('axios', () => {
 
 //Hero details test//
 
-// jest.mock('./state/state', () => ({
-//   __esModule: true,
-//   addImageAsync: jest.fn(),
-//   deleteHeroAsync: jest.fn(),
-//   removeImageAsync: jest.fn(),
-// }));
-
 describe('HeroDetails', () => {
   const hero = {
     _id: '1',
@@ -346,92 +314,6 @@ describe('HeroDetails', () => {
     const deleteButtons = screen.getAllByRole('button', { name: 'Delete' });
     expect(deleteButtons.length).toBe(2);
   });
-
-  // it('should call removeImageAsync when delete button is clicked', () => {
-  //   const hero = {
-  //     _id: '1',
-  //     Images: ['image1.jpg', 'image2.jpg'],
-  //     nickname: 'Superhero',
-  //     origin_description: 'Origin description',
-  //     real_name: 'Real Name',
-  //     superpowers: 'Superpowers',
-  //     catch_phrase: 'Catch phrase',
-  //     // Rest of the hero details...
-  //   };
-
-  //   const store = mockStore({});
-  //   store.dispatch = jest.fn();
-  //   render(
-  //     <Provider store={store}>
-  //       <Router>
-  //         <HeroDetails hero={hero} />
-  //       </Router>
-  //     </Provider>
-  //   );
-
-  //   if (hero.Images && hero.Images.length >= 0) {
-  //     const deleteButton = screen.getByTestId(
-  //       `removeImageAsync-${hero.Images[0]}`
-  //     );
-  //     fireEvent.click(deleteButton);
-  //   }
-
-  //   expect(store.dispatch).toHaveBeenCalledTimes(1);
-  //   hero.Images?.forEach(image => {
-  //     expect(store.dispatch).toHaveBeenCalledWith(
-  //       removeImageAsync({ id: hero._id, Image: image })
-  //     );
-  //   });
-  // });
-  // it('should call addImageAsync when add picture button is clicked', () => {
-  //   const hero = {
-  //     _id: '1',
-  //     Images: ['image1.jpg', 'image2.jpg'],
-  //     nickname: 'Superhero',
-  //     origin_description: 'Origin description',
-  //     real_name: 'Real Name',
-  //     superpowers: 'Superpowers',
-  //     catch_phrase: 'Catch phrase',
-  //     // Rest of the hero details...
-  //   };
-  //   const store = mockStore({}); // Create a mock store
-  //   store.dispatch = jest.fn(); // Mock the dispatch function
-
-  //   render(
-  //     <Provider store={mockStore({})}>
-  //       <Router>
-  //         <HeroDetails hero={hero} />
-  //       </Router>
-  //     </Provider>
-  //   );
-  //   const formData = new FormData();
-  //   const addImageButton = screen.getByTestId('Add image');
-  //   fireEvent.click(addImageButton);
-  //   expect(store.dispatch).toHaveBeenCalledTimes(1);
-  //   expect(store.dispatch).toHaveBeenCalledTimes(1);
-  //   expect(store.dispatch).toHaveBeenCalledWith(
-  //     addImageAsync({ id: hero._id, formData })
-  //   );
-  // });
-
-  // it('should call deleteHeroAsync when Remove Superhero button is clicked', () => {
-  //   const mockDeleteHeroAsync = jest.fn();
-  //   jest.mock('./state/state', () => ({
-  //     deleteHeroAsync: mockDeleteHeroAsync,
-  //   }));
-
-  //   const { getByText } = render(
-  //     <Provider store={store}>
-  //       <Router>
-  //         <HeroDetails hero={hero} />
-  //       </Router>
-  //     </Provider>
-  //   );
-  //   console.log(getByText('Remove Superhero'));
-  //   fireEvent.click(getByText('Remove Superhero'));
-  //   console.log(fireEvent.click(screen.getByText('Remove Superhero')));
-  //   expect(mockDeleteHeroAsync).toHaveBeenCalledWith('123');
-  // });
 });
 
 // FORM MODAL TEST//
@@ -455,7 +337,6 @@ describe('FormModal', () => {
         <FormModal onClose={onCloseMock} />
       </Provider>
     );
-    // Add your assertions here
   });
 
   test('dispatches closeModal action on handleClose', () => {
@@ -471,36 +352,6 @@ describe('FormModal', () => {
     expect(actions).toContainEqual({ type: 'heroes/closeModal' });
     expect(onCloseMock).toHaveBeenCalledTimes(1);
   });
-
-  // test('dispatches createHeroAsync action on form submit', () => {
-  //   const { getByTestId } = render(
-  //     <Provider store={store}>
-  //       <FormModal onClose={onCloseMock} />
-  //     </Provider>
-  //   );
-  //   const onSubmit = jest.fn();
-  //   const formData = {
-  //     _id: '11234123',
-  //     Images: ['image1.jpg', 'image2.jpg'],
-  //     nickname: 'Superhero',
-  //     origin_description: 'Origin description',
-  //     real_name: 'Real Name',
-  //     superpowers: 'Superpowers',
-  //     catch_phrase: 'Catch phrase',
-  //   };
-  //   console.log(screen.getByTestId('create-hero-form'));
-  //   fireEvent.submit(screen.getByTestId('create-hero-form'), {
-  //     values: formData,
-  //   });
-  //   console.log(onSubmit());
-  //   expect(onSubmit).toBeCalled();
-  // const actions = store.getActions();
-  // console.log(actions); // Debug: Check dispatched actions
-  // expect(actions).toContainEqual({
-  //   type: 'heroes/createHero/pending',
-  //   payload: formData,
-  // });
-  // });
 });
 
 // formik form //
@@ -587,10 +438,10 @@ describe('Redux Toolkit state manager', () => {
   });
 
   test('setCurrentPage should update the state correctly', () => {
-    store.dispatch(setCurrentPage(/* pass necessary parameters */));
+    store.dispatch(setCurrentPage(1));
     const { heroes } = store.getState();
 
-    expect(heroes.currentPage).toEqual(/* expected value */);
+    expect(heroes.currentPage).toEqual(1);
   });
 
   test('openModal should update the state correctly', () => {
@@ -605,35 +456,5 @@ describe('Redux Toolkit state manager', () => {
     const { heroes } = store.getState();
 
     expect(heroes.modalOpen).toBe(false);
-  });
-});
-// Automatically mocks all functions from '../components/api'
-
-describe('createHeroAsync', () => {
-  it('dispatches the correct actions when successful', async () => {
-    const formData = {
-      _id: '11234123',
-      Images: ['image1.jpg'],
-      nickname: 'Superhero',
-      origin_description: 'Origin description',
-      real_name: 'Real Name',
-      superpowers: 'Superpowers',
-      catch_phrase: 'Catch phrase',
-    }; // Add your test data here
-    createHero.mockResolvedValue('response');
-    const dispatch = jest.fn();
-    const getState = jest.fn();
-    console.log(dispatch);
-
-    await createHeroAsync(formData)(dispatch, getState, undefined);
-
-    expect(dispatch).toHaveBeenCalledTimes(2);
-    expect(dispatch).toHaveBeenCalledWith(createHeroAsync.pending());
-
-    expect(createHero).toHaveBeenCalledWith(formData);
-
-    expect(dispatch).toHaveBeenCalledWith(
-      createHeroAsync.fulfilled('response')
-    );
   });
 });
