@@ -2,7 +2,6 @@ import { Button, CircularProgress, Container, Link } from '@mui/material';
 import { useEffect } from 'react';
 import { Link as RouterLink, useNavigate, useParams } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
-
 import { HeroDetails } from './HeroDetails';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchHeroByIdAsync, setCurrentPage } from '../../state/state';
@@ -49,7 +48,7 @@ export const HeroPage = () => {
     );
   }
   return (
-    <Container style={{ backgroundColor: '#f2dcb1' }}>
+    <Container data-testid="hero-page" style={{ backgroundColor: '#f2dcb1' }}>
       <Button
         sx={{
           mb: '2rem',

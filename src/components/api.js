@@ -18,7 +18,7 @@ export const createHero = async formData => {
     });
     return response.data;
   } catch (error) {
-    throw error.response.data.error;
+    throw new Error(error.response.data.error);
   }
 };
 
@@ -27,7 +27,7 @@ export const fetchHeroById = async id => {
     const response = await axios.get(`${id}`);
     return response.data;
   } catch (error) {
-    throw error.response.data.error;
+    throw new Error(error.response.data.error);
   }
 };
 
@@ -36,10 +36,8 @@ export const removeImage = async (id, Image) => {
     const response = await axios.patch(`/${id}/remove-images`, {
       Images: [Image],
     });
-    console.log(response);
     return response.data;
   } catch (error) {
-    // Handle error
     console.error(error);
   }
 };
@@ -51,19 +49,17 @@ export const addImage = async (id, formData) => {
         'Content-Type': 'multipart/form-data',
       },
     });
-    console.log(response.data);
     return response.data;
   } catch (error) {
-    throw error.response.data.error;
+    throw new Error(error.response.data.error);
   }
 };
 
 export const deleteHero = async id => {
   try {
     const response = await axios.delete(`/${id}`);
-    console.log(response.data);
     return response.data;
   } catch (error) {
-    throw error.response.data.error;
+    throw new Error(error.response.data.error);
   }
 };

@@ -1,10 +1,10 @@
 import { Container, Typography } from '@mui/material';
-// import { FlexBetween } from '../../components/FlexBetween';
 
-export const NavBar = () => {
+export const Logo = () => {
   return (
     <Container sx={{ marginTop: '50px', marginBottom: '2rem' }}>
       <Typography
+        variant="h1"
         style={{
           textAlign: 'center',
           color: 'white',

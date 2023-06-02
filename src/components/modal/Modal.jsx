@@ -2,7 +2,7 @@ import { Box, Modal } from '@mui/material';
 
 import { CreateHeroForm } from './Form';
 import { useDispatch, useSelector } from 'react-redux';
-import { closeModal } from '../../state/state';
+import { createHeroAsync, closeModal } from '../../state/state';
 
 export const FormModal = ({ onClose }) => {
   const dispatch = useDispatch();
@@ -11,7 +11,11 @@ export const FormModal = ({ onClose }) => {
     onClose();
     dispatch(closeModal());
   };
-  const handleFormSubmit = values => {};
+
+  const handleFormSubmit = values => {
+    dispatch(createHeroAsync(values));
+  };
+
   return (
     <Modal
       open={modalOpen}

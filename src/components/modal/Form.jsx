@@ -1,5 +1,4 @@
 import { Box, Button, TextField, Typography } from '@mui/material';
-// import { useState } from 'react';
 import { Formik } from 'formik';
 import Dropzone from 'react-dropzone';
 import { createHero } from '../api';
@@ -16,7 +15,6 @@ export const CreateHeroForm = ({ onSubmit, onClose }) => {
       for (const file of values.images) {
         formData.append('Images', file);
       }
-      console.log(formData);
       await createHero(formData);
       onSubmit();
       window.location.reload();
@@ -26,6 +24,7 @@ export const CreateHeroForm = ({ onSubmit, onClose }) => {
       setSubmitting(false);
     }
   };
+
   return (
     <Formik
       initialValues={{
@@ -45,7 +44,7 @@ export const CreateHeroForm = ({ onSubmit, onClose }) => {
         setFieldValue,
         values,
       }) => (
-        <form onSubmit={handleSubmit}>
+        <form data-testid="create-hero-form" onSubmit={handleSubmit}>
           <Box display="flex" gap="30px" flexDirection="column">
             <Typography textAlign="center" variant="h2" fontWeight="900">
               Add Superhero
@@ -149,7 +148,6 @@ export const CreateHeroForm = ({ onSubmit, onClose }) => {
               <Dropzone
                 onDrop={acceptedFiles => {
                   setFieldValue('images', acceptedFiles);
-                  console.log(acceptedFiles);
                 }}
                 multiple
               >
@@ -185,7 +183,9 @@ export const CreateHeroForm = ({ onSubmit, onClose }) => {
             <Button type="submit" disabled={isSubmitting}>
               Submit
             </Button>
-            <Button onClick={onClose}>Close</Button>
+            <Button data-testid="modal-close-button" onClick={onClose}>
+              Close
+            </Button>
           </Box>
         </form>
       )}

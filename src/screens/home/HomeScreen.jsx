@@ -6,7 +6,6 @@ import {
   Pagination,
   Typography,
 } from '@mui/material';
-
 import { useEffect } from 'react';
 import { FormModal } from '../../components/modal/Modal';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
@@ -24,7 +23,7 @@ export const HomeScreen = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const {
-    list: heroes,
+    list: heroes = [],
     currentPage,
     totalPages,
   } = useSelector(state => state.heroes);
@@ -117,6 +116,7 @@ export const HomeScreen = () => {
               {heroes.slice(startIndex, endIndex).map(hero => (
                 <li style={{ marginBottom: '2rem' }} key={hero._id}>
                   <Link
+                    data-testid="hero-link"
                     component={RouterLink}
                     to={`/${hero._id}`}
                     state={{ from: location }}

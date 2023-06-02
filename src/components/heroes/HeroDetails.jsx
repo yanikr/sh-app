@@ -1,17 +1,14 @@
-import {
-  Box,
-  Button,
-  Container,
-  IconButton,
-  Input,
-  Link,
-  Typography,
-} from '@mui/material';
-import { addImage, deleteHero, removeImage } from '../api';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
+import { Box, Button, Container, Input, Link, Typography } from '@mui/material';
 import ReportProblemIcon from '@mui/icons-material/ReportProblem';
 import { Formik } from 'formik';
 import { Link as RouterLink } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import {
+  addImageAsync,
+  deleteHeroAsync,
+  removeImageAsync,
+} from '../../state/state';
+
 export const HeroDetails = ({ hero }) => {
   const {
     _id,
@@ -22,38 +19,26 @@ export const HeroDetails = ({ hero }) => {
     superpowers,
     catch_phrase,
   } = hero;
+  const dispatch = useDispatch();
 
-  const handleRemoveImage = async Image => {
-    try {
-      const response = await removeImage(_id, Image);
-
-      window.location.reload();
-      console.log(response);
-    } catch (error) {
-      console.error(error);
-    }
+  const handleRemoveImage = image => {
+    dispatch(removeImageAsync({ id: hero._id, Image: image }));
   };
+
   const handleUploadImage = async values => {
     const formData = new FormData();
     formData.append('Images', values.file);
-
     try {
-      const response = await addImage(_id, formData);
-      console.log(response);
-      window.location.reload();
+      await dispatch(addImageAsync({ id: _id, formData }));
     } catch (error) {
       console.error(error);
     }
   };
 
-  const handleDeleteHero = async _id => {
-    try {
-      const response = await deleteHero(_id);
-      console.log(response);
-    } catch (error) {
-      console.error(error);
-    }
+  const handleDeleteHero = id => {
+    dispatch(deleteHeroAsync(id));
   };
+
   return (
     <Container>
       <Box
@@ -203,7 +188,11 @@ export const HeroDetails = ({ hero }) => {
                 src={`${Image}`}
                 alt={`${nickname}`}
               />
-              <Button type="button" onClick={() => handleRemoveImage(Image)}>
+              <Button
+                data-testid={`removeImageAsync-${Image}`}
+                type="button"
+                onClick={() => handleRemoveImage(Image)}
+              >
                 Delete
               </Button>
             </li>
@@ -267,6 +256,7 @@ export const HeroDetails = ({ hero }) => {
             />
             <label htmlFor="file">
               <Button
+                data-testid="Add image"
                 size="large"
                 style={{
                   position: 'fixed',

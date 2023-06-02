@@ -5,11 +5,20 @@ import {
 } from '@reduxjs/toolkit';
 import {
   addImage,
+  createHero,
   deleteHero,
   fetchAllHeroes,
   fetchHeroById,
   removeImage,
 } from '../components/api';
+
+export const createHeroAsync = createAsyncThunk(
+  'heroes/createHero',
+  async formData => {
+    const response = await createHero(formData);
+    return response;
+  }
+);
 
 export const fetchAllHeroesAsync = createAsyncThunk(
   'heroes/fetchAll',
@@ -38,6 +47,7 @@ export const addImageAsync = createAsyncThunk(
 export const removeImageAsync = createAsyncThunk(
   'heroes/removeImage',
   async ({ id, Image }) => {
+    console.log('removeImageAsync is called');
     const response = await removeImage(id, Image);
     return response;
   }
